@@ -7,10 +7,12 @@ using System.Threading.Tasks;
 
 namespace Scribble
 {
-    enum ShapeStyle {
+    enum ShapeStyle
+    {
         Line,
         Rectangle,
-        FreeDraw
+        FreeDraw,
+        Stamp
     }
 
     class Shape
@@ -18,5 +20,25 @@ namespace Scribble
         public List<PointF> points { get; set; }
         public Color color { get; set; }
         public ShapeStyle shape { get; set; }
+
+        public Shape(List<PointF> pts, Color color, ShapeStyle shape)
+        {
+            this.color = color;
+            this.shape = shape;
+
+            switch (shape){
+                case (ShapeStyle.FreeDraw):
+                case (ShapeStyle.Stamp):
+                    points = pts;
+                    break;
+                case (ShapeStyle.Line):
+                case (ShapeStyle.Rectangle):
+                    points = new List<PointF>();
+                    points.Add(pts[0]);
+                    points.Add(pts[pts.Count - 1]);
+                    break;
+            }
+
+        }
     }
 }

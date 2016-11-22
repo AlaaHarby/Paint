@@ -36,9 +36,14 @@
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.rec_button = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
-            this.red_button = new System.Windows.Forms.ToolStripButton();
+            this.picker_button = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
-            this.blue_button = new System.Windows.Forms.ToolStripButton();
+            this.undo_button = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator6 = new System.Windows.Forms.ToolStripSeparator();
+            this.redo_button = new System.Windows.Forms.ToolStripButton();
+            this.colorDialog = new System.Windows.Forms.ColorDialog();
+            this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
+            this.stamp_brush = new System.Windows.Forms.ToolStripButton();
             this.toolStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -52,9 +57,13 @@
             this.toolStripSeparator2,
             this.rec_button,
             this.toolStripSeparator3,
-            this.red_button,
+            this.stamp_brush,
+            this.toolStripSeparator5,
+            this.picker_button,
             this.toolStripSeparator4,
-            this.blue_button});
+            this.undo_button,
+            this.toolStripSeparator6,
+            this.redo_button});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.Size = new System.Drawing.Size(1090, 31);
@@ -64,7 +73,7 @@
             // line_button
             // 
             this.line_button.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.line_button.Image = global::Scribble.Properties.Resources.line;
+            this.line_button.Image = ((System.Drawing.Image)(resources.GetObject("line_button.Image")));
             this.line_button.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.line_button.Name = "line_button";
             this.line_button.Size = new System.Drawing.Size(28, 28);
@@ -95,7 +104,7 @@
             // rec_button
             // 
             this.rec_button.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.rec_button.Image = ((System.Drawing.Image)(resources.GetObject("rec_button.Image")));
+            this.rec_button.Image = global::Scribble.Properties.Resources.rect;
             this.rec_button.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.rec_button.Name = "rec_button";
             this.rec_button.Size = new System.Drawing.Size(28, 28);
@@ -107,30 +116,61 @@
             this.toolStripSeparator3.Name = "toolStripSeparator3";
             this.toolStripSeparator3.Size = new System.Drawing.Size(6, 31);
             // 
-            // red_button
+            // picker_button
             // 
-            this.red_button.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.red_button.Image = global::Scribble.Properties.Resources.red;
-            this.red_button.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.red_button.Name = "red_button";
-            this.red_button.Size = new System.Drawing.Size(28, 28);
-            this.red_button.Text = "Red brush";
-            this.red_button.Click += new System.EventHandler(this.red_button_Click);
+            this.picker_button.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.picker_button.Image = global::Scribble.Properties.Resources.picker;
+            this.picker_button.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.picker_button.Name = "picker_button";
+            this.picker_button.Size = new System.Drawing.Size(28, 28);
+            this.picker_button.Text = "Color picker";
+            this.picker_button.ToolTipText = "Color picker";
+            this.picker_button.Click += new System.EventHandler(this.picker_button_Click);
             // 
             // toolStripSeparator4
             // 
             this.toolStripSeparator4.Name = "toolStripSeparator4";
             this.toolStripSeparator4.Size = new System.Drawing.Size(6, 31);
             // 
-            // blue_button
+            // undo_button
             // 
-            this.blue_button.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.blue_button.Image = global::Scribble.Properties.Resources.blue;
-            this.blue_button.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.blue_button.Name = "blue_button";
-            this.blue_button.Size = new System.Drawing.Size(28, 28);
-            this.blue_button.Text = "Blue brush";
-            this.blue_button.Click += new System.EventHandler(this.blue_button_Click);
+            this.undo_button.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.undo_button.Image = global::Scribble.Properties.Resources.undo;
+            this.undo_button.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.undo_button.Name = "undo_button";
+            this.undo_button.Size = new System.Drawing.Size(28, 28);
+            this.undo_button.Text = "Undo";
+            this.undo_button.Click += new System.EventHandler(this.undo_button_Click);
+            // 
+            // toolStripSeparator6
+            // 
+            this.toolStripSeparator6.Name = "toolStripSeparator6";
+            this.toolStripSeparator6.Size = new System.Drawing.Size(6, 31);
+            // 
+            // redo_button
+            // 
+            this.redo_button.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.redo_button.Image = global::Scribble.Properties.Resources.redo;
+            this.redo_button.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.redo_button.Name = "redo_button";
+            this.redo_button.Size = new System.Drawing.Size(28, 28);
+            this.redo_button.Text = "Redo";
+            this.redo_button.Click += new System.EventHandler(this.redo_button_Click);
+            // 
+            // toolStripSeparator5
+            // 
+            this.toolStripSeparator5.Name = "toolStripSeparator5";
+            this.toolStripSeparator5.Size = new System.Drawing.Size(6, 31);
+            // 
+            // stamp_brush
+            // 
+            this.stamp_brush.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.stamp_brush.Image = global::Scribble.Properties.Resources.star;
+            this.stamp_brush.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.stamp_brush.Name = "stamp_brush";
+            this.stamp_brush.Size = new System.Drawing.Size(28, 28);
+            this.stamp_brush.Text = "Star stamp";
+            this.stamp_brush.Click += new System.EventHandler(this.stamp_brush_Click);
             // 
             // Form1
             // 
@@ -142,6 +182,7 @@
             this.Name = "Form1";
             this.Text = "Scribble";
             this.Paint += new System.Windows.Forms.PaintEventHandler(this.Form1_Paint);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Form1_KeyDown);
             this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Form1_MouseDown);
             this.MouseMove += new System.Windows.Forms.MouseEventHandler(this.Form1_MouseMove);
             this.MouseUp += new System.Windows.Forms.MouseEventHandler(this.Form1_MouseUp);
@@ -161,9 +202,14 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
         private System.Windows.Forms.ToolStripButton rec_button;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
-        private System.Windows.Forms.ToolStripButton red_button;
+        private System.Windows.Forms.ToolStripButton picker_button;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator4;
-        private System.Windows.Forms.ToolStripButton blue_button;
+        private System.Windows.Forms.ToolStripButton undo_button;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator6;
+        private System.Windows.Forms.ToolStripButton redo_button;
+        private System.Windows.Forms.ColorDialog colorDialog;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator5;
+        private System.Windows.Forms.ToolStripButton stamp_brush;
     }
 }
 

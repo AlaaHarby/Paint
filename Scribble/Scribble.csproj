@@ -55,7 +55,6 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Shape.cs" />
-    <Compile Include="Stroke.cs" />
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
@@ -83,19 +82,31 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\free.png" />
+    <None Include="Resources\blue.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\red.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\line.png" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\free.png" />
+  </ItemGroup>
+  <ItemGroup>
     <None Include="Resources\rect.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\blue.png" />
+    <None Include="Resources\undo.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\red.png" />
+    <None Include="Resources\redo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\star.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\picker.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

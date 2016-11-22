@@ -8,7 +8,8 @@ namespace Scribble
 {
     // add resize option
     // add select
-    // stamp brush
+    // add state shape - rename shape ? -
+    // stamp brush [DONE]
     // animation
     // undo/redo [DONE]
     // colors [DONE]
@@ -21,12 +22,13 @@ namespace Scribble
     {
         List<Shape> shapes;
         List<Shape> undo;
+        bool isDragging = false;
 
         List<PointF> points;
+        List<int> sizes;
         Color color;
         ShapeStyle style;
-        bool isDragging = false;
- 
+
         public Form1()
         {
             InitializeComponent();
@@ -41,18 +43,18 @@ namespace Scribble
             Graphics g = e.Graphics;
             foreach (Shape s in shapes)
             {
-                draw(g, s.points, s.shape, s.color);
+                draw(g, s.points, s.sizes, s.shape, s.color);
             }
 
             if (isDragging)
             {
-                draw(g, points, style, color);
+                draw(g, points, sizes, style, color);
             }
         }
 
         Random randomNum = new Random();
 
-        private void draw(Graphics g, List<PointF> pts, ShapeStyle ss, Color cc)
+        private void draw(Graphics g, List<PointF> pts, List<int> sz, ShapeStyle ss, Color cc)
         {
             Pen p = new Pen(cc);
 
@@ -74,20 +76,35 @@ namespace Scribble
                     g.DrawCurve(p, pts.ToArray());
                     break;
                 case ShapeStyle.Stamp:
+                    int i = 0;
                     foreach (PointF pp in pts)
                     {
-                        int r = randomNum.Next(5, 30);
-                        g.DrawImage(Resources.star, pp.X, pp.Y, r, r);
+                        g.DrawImage(Resources.star, pp.X, pp.Y, sz[i], sz[i]);
+                        i++;
                     }
                     break;
             }
+        }
+
+        double distance(PointF p1, PointF p2)
+        {
+            return Math.Sqrt(Math.Pow(p1.X - p2.X, 2) + Math.Pow(p1.Y - p2.Y, 2));
         }
 
         private void Form1_MouseMove(object sender, MouseEventArgs e)
         {
             if (e.Button != MouseButtons.None)
             {
+                if (style == ShapeStyle.Stamp && points.Count > 0)
+                {
+                    if (distance(e.Location, points[points.Count - 1]) < 10)
+                    {
+                        return;
+                    }
+                }
                 points.Add(e.Location);
+                sizes.Add(randomNum.Next(5, 35));
+
                 Invalidate();
             }
         }
@@ -95,18 +112,26 @@ namespace Scribble
         private void Form1_MouseDown(object sender, MouseEventArgs e)
         {
             points = new List<PointF>();
+            sizes = new List<int>();
 
             isDragging = true;
             points.Add(e.Location);
+            sizes.Add(randomNum.Next(5, 35));
+
         }
 
         private void Form1_MouseUp(object sender, MouseEventArgs e)
         {
             isDragging = false;
             points.Add(e.Location);
+            sizes.Add(randomNum.Next(5, 35));
 
             Shape p = new Shape(points, color, style);
+            if (style == ShapeStyle.Stamp)
+                p.sizes = sizes;
+
             shapes.Add(p);
+            Invalidate();
         }
 
         private void line_button_Click(object sender, EventArgs e)

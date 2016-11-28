@@ -6,18 +6,7 @@ using System.Windows.Forms;
 
 namespace Scribble
 {
-    // add resize option
-    // add select
-    // add state shape - rename shape ? -
-    // stamp brush [DONE]
-    // animation
-    // undo/redo [DONE]
-    // colors [DONE]
-    // draw line, Rec [DONE]
-    // free draw [DONE]
-    // Line and Rec flexible [DONE]
-    // ignore list of points of rec and line [DONE]
-
+    // add save and load
     public partial class Form1 : Form
     {
         List<Shape> shapes;
@@ -26,16 +15,14 @@ namespace Scribble
 
         List<PointF> points;
         List<int> sizes;
-        Color color;
-        ShapeStyle style;
+        Color color = Color.Black;
+        ShapeStyle style = ShapeStyle.FreeDraw;
 
         public Form1()
         {
             InitializeComponent();
             shapes = new List<Shape>();
             undo = new List<Shape>();
-            color = Color.Red;
-            style = ShapeStyle.FreeDraw;
         }
 
         private void Form1_Paint(object sender, PaintEventArgs e)
